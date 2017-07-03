@@ -4,7 +4,7 @@ import { Mongo } from 'meteor/mongo';
 
 export const Players = new Mongo.Collection('players');
 
-const PlayerSchema({
+const PlayerSchema = new SimpleSchema({
   name: { type: String},
   team: { type: String},
   ballManipulaition: { type: Number,defaultValue: 0},
@@ -16,6 +16,6 @@ const PlayerSchema({
   gameStrategy: { type: Number, defaultValue: 0},
   playmakingRisks: { type: Number, defaultValue:0},
   notes: {type: String, optional: true},
-}),
+});
 
 Players.attachSchema(PlayerSchema);

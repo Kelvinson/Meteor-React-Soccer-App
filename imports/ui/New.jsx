@@ -1,6 +1,29 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
+import { Players } from '../api/players';
 
 export default class Example extends Component {
+  submitPlayer(event) {
+    event.preventDefault();
+
+    Players.insert({
+      name: this.refs.name.value,
+      team: this.refs.team.value,
+      ballManipulaition:  this.refs.ballManipulaition.value,
+      kickingAbilities: this.refs.kickingAbilities.value,
+      passingAbilities:this.refs.passingAbilities.value,
+      dualTackling:this.refs.dualTackling.value,
+      fieldCoverage:this.refs.fieldCoverage.value,
+      blockingAbilities:this.refs.blockingAbilities.value,
+      gameStrategy:this.refs.gameStrategy.value,
+      playmakingRisks:this.refs.playmakingRisks.value,
+      notes:this.refs.notes.value,
+      createAt: new Date(),
+    });
+    console.log("Success player submitted!");
+    browserHistory.push('/');
+  }
+
   render() {
     return(
       // Note: in the return syntax, only one div child is allowed, any
@@ -10,7 +33,7 @@ export default class Example extends Component {
       // Thus you only need one div as the parent and the other divs as
       // its children.
       <div className="row">
-        <form className="col s12">
+        <form className="col s12" onSubmit={this.submitPlayer.bind(this)}>
           <h3>Add a new player</h3>
         {/* for name and Team */}
           <div className="row">
@@ -18,7 +41,7 @@ export default class Example extends Component {
               <input placeholder="Name" ref="name" type="text" className="validate"/>
             </div>
             <div className="input-field col s6">
-              <input placeholder="Team" ref="Team" type="text" className="validate"/>
+              <input placeholder="Team" ref="team" type="text" className="validate"/>
             </div>
           </div>
           {/* for ballManipulaition and kickingAbilities*/}
