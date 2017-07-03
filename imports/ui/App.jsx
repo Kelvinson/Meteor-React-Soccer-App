@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
+import React, { PropTypes,Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import {List } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import {createContainer} from 'meteor/react-meteor-data';
+import {Link} from 'react-router';
 
-
+import {Players} from '../api/players';
 import Player from "./Player";
 import TeamList from './Team-list'
 import TeamStats from './Team-stats'
 
-export default class App extends Component {
+export  class App extends Component {
   constructor(props){
     super(props);
 
@@ -18,52 +20,19 @@ export default class App extends Component {
     this.state = {players:[]};
   }
 
-componentWillMount() {
-  this.setState({players:[{
-    _id: 1,
-    name: "Wang Dong",
-    ballManipulaition:4,
-    kickingAbilities:4,
-    passingAbilities:4,
-    dualTackling:3,
-    fieldCoverage:3,
-    blockingAbilities:4,
-    gameStrategy:4,
-    playmakingRisks:4,
-  },
-  {
-    _id: 2,
-    name: "Speedy Gonz",
-    ballManipulaition:4,
-    kickingAbilities:4,
-    passingAbilities:4,
-    dualTackling:3,
-    fieldCoverage:3,
-    blockingAbilities:4,
-    gameStrategy:4,
-    playmakingRisks:4,
-  },
-  {
-    _id: 3,
-    name: "Tracey Good",
-    ballManipulaition:4,
-    kickingAbilities:4,
-    passingAbilities:4,
-    dualTackling:3,
-    fieldCoverage:3,
-    blockingAbilities:4,
-    gameStrategy:4,
-    playmakingRisks:4,
-  }]});
-}
+//Move componentWillMount because we want to load the static data
+// from database other than componentWillMount() method;
 
-  getPlayers() {
-    return [
-    ];
-  }
+// componentWillMount() {
+//   .......
+// }
+
+// it is not returning this.state.players anymore for
+// the state is now by returned by the createContainer() function
+// at the end of the code;
 
   renderPlayers() {
-    return this.state.players.map((player) => (
+    return this.props.players.map((player) => (
       <TeamList key={player._id} player={player}/>
     ));
   }
@@ -79,7 +48,7 @@ componentWillMount() {
           <div className="row">
             <div className="col s12 m7" ><Player /></div>
             <div className="col s12 m5" >
-              <h2>Team list</h2>
+              <h2>Team list</h2><Link to="/new" className="waves-effect waves-light btn">Add player</Link>
               <Divider/>
               <List>
                 {this.renderPlayers()}
@@ -93,3 +62,14 @@ componentWillMount() {
     )
   }
 }
+
+App.propTypes = {
+  players: PropTypes.array.isRequired,
+};
+
+export default createContainer(() => {
+Meteor.subscribe("players");
+  return {
+    players: Players.find({}, {sort:{name:1}}).fetch(),
+  };
+},App);
