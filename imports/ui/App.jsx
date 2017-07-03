@@ -11,49 +11,59 @@ import TeamList from './Team-list'
 import TeamStats from './Team-stats'
 
 export default class App extends Component {
+  constructor(props){
+    super(props);
+
+    //setting up the state
+    this.state = {players:[]};
+  }
+
+componentWillMount() {
+  this.setState({players:[{
+    _id: 1,
+    name: "Wang Dong",
+    ballManipulaition:4,
+    kickingAbilities:4,
+    passingAbilities:4,
+    dualTackling:3,
+    fieldCoverage:3,
+    blockingAbilities:4,
+    gameStrategy:4,
+    playmakingRisks:4,
+  },
+  {
+    _id: 2,
+    name: "Speedy Gonz",
+    ballManipulaition:4,
+    kickingAbilities:4,
+    passingAbilities:4,
+    dualTackling:3,
+    fieldCoverage:3,
+    blockingAbilities:4,
+    gameStrategy:4,
+    playmakingRisks:4,
+  },
+  {
+    _id: 3,
+    name: "Tracey Good",
+    ballManipulaition:4,
+    kickingAbilities:4,
+    passingAbilities:4,
+    dualTackling:3,
+    fieldCoverage:3,
+    blockingAbilities:4,
+    gameStrategy:4,
+    playmakingRisks:4,
+  }]});
+}
+
   getPlayers() {
     return [
-      {
-        _id: 1,
-        name: "Wang Dong",
-        ballManipulaition:4,
-        kickingAbilities:4,
-        passingAbilities:4,
-        dualTackling:3,
-        fieldCoverage:3,
-        blockingAbilities:4,
-        gameStrategy:4,
-        playmakingRisks:4,
-      },
-      {
-        _id: 2,
-        name: "Speedy Gonz",
-        ballManipulaition:4,
-        kickingAbilities:4,
-        passingAbilities:4,
-        dualTackling:3,
-        fieldCoverage:3,
-        blockingAbilities:4,
-        gameStrategy:4,
-        playmakingRisks:4,
-      },
-      {
-        _id: 3,
-        name: "Tracey Good",
-        ballManipulaition:4,
-        kickingAbilities:4,
-        passingAbilities:4,
-        dualTackling:3,
-        fieldCoverage:3,
-        blockingAbilities:4,
-        gameStrategy:4,
-        playmakingRisks:4,
-      }
     ];
   }
 
   renderPlayers() {
-    return this.getPlayers().map((player) => (
+    return this.state.players.map((player) => (
       <TeamList key={player._id} player={player}/>
     ));
   }
@@ -69,6 +79,7 @@ export default class App extends Component {
           <div className="row">
             <div className="col s12 m7" ><Player /></div>
             <div className="col s12 m5" >
+              <h2>Team list</h2>
               <Divider/>
               <List>
                 {this.renderPlayers()}

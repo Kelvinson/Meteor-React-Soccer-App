@@ -45,7 +45,7 @@ export default class Player extends Component {
                   <Avatar size={32} color={blue200} backgroundColor={blue900}>
                     4
                   </Avatar>
-                  King abilities
+                  Kicking abilities
                 </Chip>
                 <Chip
                   backgroundColor={blue200}
