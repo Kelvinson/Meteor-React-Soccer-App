@@ -13,12 +13,34 @@ import TeamList from './Team-list';
 import TeamStats from './Team-stats';
 import AccountsWrapper from './AccountsWrapper';
 
+let tempPlayer = {
+  name: "Temp player",
+  team: "Lynda",
+  ballManipulaition:1,
+  kickingAbilities:2,
+  passingAbilities:4,
+  dualTackling:2,
+  fieldCoverage:3,
+  blockingAbilities:2,
+  gameStrategy:2,
+  playmakingRisks:2,
+  notes: "This is a temp player",
+  createAt: new Date(),
+  owner: Meteor.userId(),
+}
+
+
+
+
+
+
 export   class App extends Component {
   constructor(props){
     super(props);
 
     //setting up the state
-    this.state = {players:[]};
+    this.state = {currentPlayer: tempPlayer};
+    this.updateCurrentPlayer = this.updateCurrentPlayer.bind(this);
   }
 
 //Move componentWillMount because we want to load the static data
@@ -34,8 +56,14 @@ export   class App extends Component {
 
   renderPlayers() {
     return this.props.players.map((player) => (
-      <TeamList key={player._id} player={player}/>
+      <TeamList key={player._id} player={player} updateCurrentPlayer={this.updateCurrentPlayer}/>
     ));
+  }
+
+  updateCurrentPlayer(player) {
+    this.setState({
+      currentPlayer:player,
+    });
   }
 
   render() {
@@ -49,7 +77,7 @@ export   class App extends Component {
           <AccountsWrapper/>
         </AppBar>
           <div className="row">
-            <div className="col s12 m7" ><Player /></div>
+            <div className="col s12 m7" ><Player player={this.state.currentPlayer} /></div>
             <div className="col s12 m5" >
               <h2>Team list</h2><Link to="/new" className="waves-effect waves-light btn">Add player</Link>
               <Divider/>

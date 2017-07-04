@@ -20,10 +20,15 @@ const styles = {
 
 export default class Player extends Component {
   render() {
+    const player = this.props.player;
+    const defense = player.dualTackling + player.fieldCoverage + player.blockingAbilities+player.gameStrategy+player.playmakingRisks;
+    const offense = player.kickingAbilities + player.gameStrategy + player.ballManipulaition + player.passingAbilities + player.fieldCoverage+ player.playmakingRisks;
+    const total = player.kickingAbilities + player.gameStrategy + player.ballManipulaition + player.passingAbilities + player.fieldCoverage+ player.playmakingRisks + player.dualTackling + player.blockingAbilities;
+
     return (
       <Card>
         <CardMedia
-          overlay={<CardTitle title="Wang Dong" subtitle="A super player with offense: 20 Defense: 13" />}
+          overlay={<CardTitle title={player.name} subtitle={`Offense:${offense} - Defense:${defense} - Total:${total}`}/>}
           >
             <img src="player.jpg" alt="Wang Dong" />
           </CardMedia>
@@ -34,7 +39,7 @@ export default class Player extends Component {
               style={styles.chip}
               >
                 <Avatar size={32} color={blue200} backgroundColor={blue900}>
-                  4
+                  {player.ballManipulaition}
                 </Avatar>
                 Ball manipulation
               </Chip>
@@ -43,7 +48,7 @@ export default class Player extends Component {
                 style={styles.chip}
                 >
                   <Avatar size={32} color={blue200} backgroundColor={blue900}>
-                    4
+                    {player.kickingAbilities}
                   </Avatar>
                   Kicking abilities
                 </Chip>
@@ -52,7 +57,7 @@ export default class Player extends Component {
                   style={styles.chip}
                   >
                     <Avatar size={32} color={blue200} backgroundColor={blue900}>
-                      3
+                      {player.dualTackling}
                     </Avatar>
                     Duel/Tackling abilities
                   </Chip>
@@ -61,7 +66,7 @@ export default class Player extends Component {
                     style={styles.chip}
                     >
                       <Avatar size={32} color={blue200} backgroundColor={blue900}>
-                        4
+                        {player.fieldCoverage}
                       </Avatar>
                       Field speed coverage
                     </Chip>
@@ -70,7 +75,7 @@ export default class Player extends Component {
                       style={styles.chip}
                       >
                         <Avatar size={32} color={blue200} backgroundColor={blue900}>
-                          3
+                          {player.blockingAbilities}
                         </Avatar>
                         Blocking abilities
                       </Chip>
@@ -79,7 +84,7 @@ export default class Player extends Component {
                         style={styles.chip}
                         >
                           <Avatar size={32} color={blue200} backgroundColor={blue900}>
-                            4
+                            {player.gameStrategy}
                           </Avatar>
                           Game stratigies
                         </Chip>
@@ -88,7 +93,7 @@ export default class Player extends Component {
                           style={styles.chip}
                           >
                             <Avatar size={32} color={blue200} backgroundColor={blue900}>
-                              3
+                              {player.playmakingRisks}
                             </Avatar>
                             Playing risks
                           </Chip>
