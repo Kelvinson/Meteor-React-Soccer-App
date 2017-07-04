@@ -6,7 +6,7 @@ export default class Example extends Component {
   submitPlayer(event) {
     event.preventDefault();
 
-    Players.insert({
+    let player = {
       name: this.refs.name.value,
       team: this.refs.team.value,
       ballManipulaition:  this.refs.ballManipulaition.value,
@@ -20,9 +20,17 @@ export default class Example extends Component {
       notes:this.refs.notes.value,
       createAt: new Date(),
       owner: Meteor.userId(),
+    }
+
+    Meteor.call('insertPlayer',player,(error)=> {
+      if(error) {
+        alert("Oups something went wrong:" + error.reason);
+      } else {
+        alert("player added");
+        browserHistory.push('/');
+      }
     });
-    console.log("Success player submitted!");
-    browserHistory.push('/');
+
   }
 
   render() {

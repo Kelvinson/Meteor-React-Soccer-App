@@ -4,6 +4,19 @@ import { Mongo } from 'meteor/mongo';
 
 export const Players = new Mongo.Collection('players');
 
+Players.allow({
+  insert(){return false;},
+  update() {return false;},
+  remove() {return false;}
+});
+
+Players.deny({
+  insert(){return true;},
+  insert(){return true;},
+  insert(){return true;}
+});
+
+
 const PlayerSchema = new SimpleSchema({
   name: { type: String},
   team: { type: String},
@@ -16,7 +29,7 @@ const PlayerSchema = new SimpleSchema({
   gameStrategy: { type: Number, defaultValue: 0},
   playmakingRisks: { type: Number, defaultValue:0},
   notes: {type: String, optional: true},
-  owner: {type: String},
+  owner: {type: String, optional:true},
 });
 
 Players.attachSchema(PlayerSchema);
