@@ -89,7 +89,7 @@ export   class App extends Component {
       return (<Edit currentPlayer={this.state.currentPlayer}
         showTeamStats = {this.showTeamStats}/>);
       } else {
-        return (<TeamStats />);
+        return (<TeamStats players={this.props.players} />);
       }
     }
   render() {
@@ -99,13 +99,14 @@ export   class App extends Component {
           <AppBar
             title="Soccer Application"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
-            showMenuIconButton={false}>
+            showMenuIconButton={false}
+            style={{backgroundColor:'#0277BD'}}>
           <AccountsWrapper/>
         </AppBar>
           <div className="row">
             <div className="col s12 m7" ><Player player={this.state.currentPlayer} showEditForm={this.showEditForm}/></div>
             <div className="col s12 m5" >
-              <h2>Team list</h2><Link to="/new" className="waves-effect waves-light btn">Add player</Link>
+              <h2>Team list</h2><Link to="/new" className="waves-effect waves-light light-blue darken-3 btn">Add player</Link>
               <Divider/>
               <List>
                 {this.renderPlayers()}

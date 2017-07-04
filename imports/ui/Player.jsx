@@ -3,7 +3,7 @@ import {Card, CardMedia, CardHeader,CardTitle,CardText,CardActions} from 'materi
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
-import { blue200, blue900 } from 'material-ui/styles/colors';
+import { blue200, lightBlue800, lightBlue50 } from 'material-ui/styles/colors';
 
 const styles = {
   chip: {
@@ -42,7 +42,7 @@ export default class Player extends Component {
               backgroundColor={blue200}
               style={styles.chip}
               >
-                <Avatar size={32} color={blue200} backgroundColor={blue900}>
+                <Avatar size={32} color={lightBlue50} backgroundColor={lightBlue800}>
                   {player.ballManipulaition}
                 </Avatar>
                 Ball manipulation
@@ -51,7 +51,7 @@ export default class Player extends Component {
                 backgroundColor={blue200}
                 style={styles.chip}
                 >
-                  <Avatar size={32} color={blue200} backgroundColor={blue900}>
+                  <Avatar size={32} color={lightBlue50} backgroundColor={lightBlue800}>
                     {player.kickingAbilities}
                   </Avatar>
                   Kicking abilities
@@ -60,7 +60,7 @@ export default class Player extends Component {
                   backgroundColor={blue200}
                   style={styles.chip}
                   >
-                    <Avatar size={32} color={blue200} backgroundColor={blue900}>
+                    <Avatar size={32} color={lightBlue50} backgroundColor={lightBlue800}>
                       {player.dualTackling}
                     </Avatar>
                     Duel/Tackling abilities
@@ -69,7 +69,7 @@ export default class Player extends Component {
                     backgroundColor={blue200}
                     style={styles.chip}
                     >
-                      <Avatar size={32} color={blue200} backgroundColor={blue900}>
+                      <Avatar size={32} color={lightBlue50} backgroundColor={lightBlue800}>
                         {player.fieldCoverage}
                       </Avatar>
                       Field speed coverage
@@ -78,7 +78,7 @@ export default class Player extends Component {
                       backgroundColor={blue200}
                       style={styles.chip}
                       >
-                        <Avatar size={32} color={blue200} backgroundColor={blue900}>
+                        <Avatar size={32} color={lightBlue50} backgroundColor={lightBlue800}>
                           {player.blockingAbilities}
                         </Avatar>
                         Blocking abilities
@@ -87,7 +87,7 @@ export default class Player extends Component {
                         backgroundColor={blue200}
                         style={styles.chip}
                         >
-                          <Avatar size={32} color={blue200} backgroundColor={blue900}>
+                          <Avatar size={32} color={lightBlue50} backgroundColor={lightBlue800}>
                             {player.gameStrategy}
                           </Avatar>
                           Game stratigies
@@ -96,7 +96,7 @@ export default class Player extends Component {
                           backgroundColor={blue200}
                           style={styles.chip}
                           >
-                            <Avatar size={32} color={blue200} backgroundColor={blue900}>
+                            <Avatar size={32} color={lightBlue50} backgroundColor={lightBlue800}>
                               {player.playmakingRisks}
                             </Avatar>
                             Playing risks
