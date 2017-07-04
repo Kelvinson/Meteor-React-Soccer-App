@@ -12,6 +12,7 @@ import Player from "./Player";
 import TeamList from './Team-list';
 import TeamStats from './Team-stats';
 import AccountsWrapper from './AccountsWrapper';
+import Edit from './EditPlayer';
 
 let tempPlayer = {
   name: "Temp player",
@@ -39,8 +40,13 @@ export   class App extends Component {
     super(props);
 
     //setting up the state
-    this.state = {currentPlayer: tempPlayer};
+    this.state = {
+      currentPlayer: tempPlayer,
+      showEditPlayer:false,
+    };
     this.updateCurrentPlayer = this.updateCurrentPlayer.bind(this);
+    this.showEditForm = this.showEditForm.bind(this);
+    this.showTeamStats = this.showTeamStats.bind(this);
   }
 
 //Move componentWillMount because we want to load the static data
@@ -66,6 +72,26 @@ export   class App extends Component {
     });
   }
 
+  showEditForm() {
+    this.setState({
+      showEditPlayer: true,
+    });
+  }
+
+  showTeamStats() {
+    this.setState({
+      showEditPlayer: false,
+    });
+  }
+
+  showForm() {
+    if(this.state.showEditPlayer == true) {
+      return (<Edit currentPlayer={this.state.currentPlayer}
+        showTeamStats = {this.showTeamStats}/>);
+      } else {
+        return (<TeamStats />);
+      }
+    }
   render() {
     return (
       <MuiThemeProvider>
@@ -77,7 +103,7 @@ export   class App extends Component {
           <AccountsWrapper/>
         </AppBar>
           <div className="row">
-            <div className="col s12 m7" ><Player player={this.state.currentPlayer} /></div>
+            <div className="col s12 m7" ><Player player={this.state.currentPlayer} showEditForm={this.showEditForm}/></div>
             <div className="col s12 m5" >
               <h2>Team list</h2><Link to="/new" className="waves-effect waves-light btn">Add player</Link>
               <Divider/>
@@ -86,7 +112,7 @@ export   class App extends Component {
               </List>
               <Divider/>
             </div>
-            <div className="col s12 m5" ><TeamStats /></div>
+            <div className="col s12 m5" >{this.showForm()}</div>
           </div>
         </div>
       </MuiThemeProvider>
